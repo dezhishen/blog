@@ -88,7 +88,7 @@
             await this.renderSummary()
             let url = window.location.href
             if (url.split("#")[1]) {
-                this.renderContent(this.tagMappingUrl[URLDecoder.decode(url.split("#")[1])])
+                this.renderContent(this.tagMappingUrl[decodeURI(url.split("#")[1])])
             } else {
                 this.renderContent("./README.md")
             }
