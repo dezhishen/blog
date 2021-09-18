@@ -53,15 +53,15 @@
                     }
                 }
             },
-            renderSummary: function () {
-                this.renderFromUrl("./SUMMARY.md").then(
+            renderSummary: async function () {
+                await this.renderFromUrl("./SUMMARY.md").then(
                     data => {
                         this.$refs.summary.innerHTML = data
                     }
                 )
             },
-            renderContent: function (url) {
-                this.renderFromUrl(url).then(data => {
+            renderContent: async function (url) {
+                await this.renderFromUrl(url).then(data => {
                     this.$refs.content.innerHTML = data
                 })
             },
