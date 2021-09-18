@@ -9,12 +9,14 @@
 </head>
 
 <body>
-    <div id="content"></div>
+    <div id="app">
+        <div id="content"></div>
+    </div>
 </body>
 <script>
     var vm = new Vue({
-        el: "#content",
-        name: "content",
+        el: "#app",
+        name: "app",
         props: {},
         computed: {},
         data() {
