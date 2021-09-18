@@ -41,7 +41,6 @@
         methods: {
             init: function () {
                 this.initRender()
-                this.renderSummary()
             },
             initRender: function () {
                 this.renderer = new marked.Renderer();
@@ -86,6 +85,7 @@
         mounted: async function () {
             window.renderContent = this.renderContent;
             await this.init()
+            await this.renderSummary()
             let url = window.location.href
             if (url.split("#")[1]) {
                 this.renderContent(this.tagMappingUrl[url.split("#")[1]])
