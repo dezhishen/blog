@@ -34,6 +34,7 @@
         computed: {},
         data() {
             return {
+                tagMappingUrl: {},
                 renderer: null,
             }
         },
@@ -41,7 +42,6 @@
             init: function () {
                 this.initRender()
                 this.renderSummary()
-                this.renderContent("./README.md")
             },
             initRender: function () {
                 this.renderer = new marked.Renderer();
@@ -49,6 +49,7 @@
                     if (href.startsWith("http")) {
                         return `<a href="${href}" target="_blank">${text}</a>`
                     } else {
+                        this.tagMappingUrl[text] = [href]
                         return `<a href="#${text}" onclick="renderContent('${href}')">${text}</a>`
                     }
                 }
@@ -84,7 +85,14 @@
 
         mounted: async function () {
             window.renderContent = this.renderContent;
-            this.init()
+            await this.init()
+            let url = window.location.href
+            if (url.split("#")[1]) {
+                this.renderContent(this.tagMappingUrl[url.split("#")[1]])
+            } else {
+                this.renderContent("./README.md")
+            }
+
         }
     });
 </script>
