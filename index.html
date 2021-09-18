@@ -39,8 +39,8 @@
             }
         },
         methods: {
-            init: function () {
-                this.initRender()
+            init: async function () {
+                await this.initRender()
             },
             initRender: function () {
                 this.renderer = new marked.Renderer();
