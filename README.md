@@ -1,2 +1,1 @@
-# blog
-gitbook格式的博客
+# 博客
