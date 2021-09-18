@@ -48,7 +48,7 @@
                     if (href.startsWith("http")) {
                         return `<a href="${href}" target="_blank">${text}</a>`
                     } else {
-                        this.tagMappingUrl[text] = [href]
+                        this.tagMappingUrl[text] = href
                         return `<a href="#${text}" onclick="renderContent('${href}')">${text}</a>`
                     }
                 }
