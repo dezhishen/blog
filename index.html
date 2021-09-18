@@ -63,7 +63,7 @@
             renderFromUrl: function (url, node) {
                 let instance = axios.create()
                 return instance.get(url).then(res => {
-                    return res.data
+                    return marked(res.data, { renderer: this.renderer })
                 })
             }
         },
