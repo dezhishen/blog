@@ -23,7 +23,7 @@
             }
         },
         methods: {
-            renderFromUrl: function (div, url) {
+            renderFromUrl: function (url) {
                 $.get(url, function (response, status, xhr) {
                     console.log("===>", response)
                     $("#content").html(marked(response));
