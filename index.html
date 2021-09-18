@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>博客</title>
@@ -13,10 +13,10 @@
     <div id="app">
         <el-container>
             <el-aside>
-                <div id="summary"></div>
+                <div v-html="summary"></div>
             </el-aside>
             <el-main>
-                <div id="content"></div>
+                <div v-html="content"></div>
             </el-main>
         </el-container>
         <div id="content"></div>
@@ -30,7 +30,8 @@
         computed: {},
         data() {
             return {
-                renderer: null
+                renderer: null,
+                content: null
             }
         },
         methods: {
@@ -45,17 +46,22 @@
                 }
             },
             renderSummary: function () {
-                this.renderFromUrl("./SUMMARY.md", "#summary")
+                this.renderFromUrl("./SUMMARY.md").then(
+                    data => {
+                        this.summary = data
+                    }
+                )
             },
             renderContent: function (url) {
-                this.renderFromUrl(url, "#content")
-
+                this.renderFromUrl(url).then(data => {
+                    this.content = data
+                })
             },
             renderFromUrl: function (url, node) {
-                const that = this
-                $.get(url, function (response, status, xhr) {
-                    $(node).html(marked(response, { renderer: that.renderer }));
-                });
+                let instance = axios.create()
+                instance.get(url).then(res => {
+                    resolve(res.data)
+                })
             }
         },
 
