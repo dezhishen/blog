@@ -59,11 +59,10 @@
                     this.content = data
                 })
             },
-            renderFromUrl: async function (url, node) {
+            renderFromUrl: function (url, node) {
                 let instance = axios.create()
-                let res = await instance.get(url)
-                return new Promise((resolve, reject) => {
-                    resolve(res.data)
+                return instance.get(url).then(res => {
+                    return res.data
                 })
             }
         },
