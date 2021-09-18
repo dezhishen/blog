@@ -45,7 +45,7 @@
             initRender: function () {
                 this.renderer = new marked.Renderer();
                 this.renderer.link = function (href, title, text) {
-                    if (href.startWith("http")) {
+                    if (href.startsWith("http")) {
                         return `<a href="${href}" target="_blank">${text}</a>`
                     } else {
                         return `<a href="#" onclick="renderContent('${href}')">${text}</a>`
