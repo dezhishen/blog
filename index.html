@@ -17,10 +17,10 @@
     <div id="app">
         <el-container>
             <el-aside>
-                <div v-html="summary"></div>
+                <div ref="summary"></div>
             </el-aside>
             <el-main>
-                <div v-html="content"></div>
+                <div ref="content"></div>
             </el-main>
         </el-container>
         <div id="content"></div>
@@ -35,8 +35,6 @@
         data() {
             return {
                 renderer: null,
-                content: null,
-                summary: null
             }
         },
         methods: {
@@ -57,13 +55,13 @@
             renderSummary: function () {
                 this.renderFromUrl("./SUMMARY.md").then(
                     data => {
-                        this.summary = data
+                        this.$refs.summary.innerHTML = data
                     }
                 )
             },
             renderContent: function (url) {
                 this.renderFromUrl(url).then(data => {
-                    this.content = data
+                    this.$refs.content.innerHTML = data
                 })
             },
             renderFromUrl: function (url, node) {
