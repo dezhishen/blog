@@ -29,23 +29,35 @@
         computed: {},
         data() {
             return {
-
+                renderer: null
             }
         },
         methods: {
             init: function () {
+                this.initRender()
                 this.renderSummary()
+            },
+            initRender: function () {
+                this.renderer = new marked.Renderer();
+                this.renderer.link = function (href, title, text) {
+                    return `<a href="#" onclick="()=>{renderContent('${href}')}">${text}</a>`
+                }
             },
             renderSummary: function () {
                 this.renderFromUrl("./SUMMARY.md", "#summary")
             },
+            renderContent: function (url) {
+                this.renderFromUrl(url, "#content")
+
+            },
             renderFromUrl: function (url, node) {
+                const that = this
                 $.get(url, function (response, status, xhr) {
-                    console.log("===>", response)
-                    $(node).html(marked(response));
+                    $(node).html(marked(response, { renderer: that.renderer }));
                 });
             }
         },
+
         mounted: async function () {
             this.init()
         }
