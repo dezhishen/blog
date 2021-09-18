@@ -5,11 +5,19 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>博客</title>
 </head>
 
 <body>
     <div id="app">
+        <el-container>
+            <el-aside>
+                <div id="summary"></div>
+            </el-aside>
+            <el-main>
+            </el-main>
+        </el-container>
         <div id="content"></div>
     </div>
 </body>
@@ -25,16 +33,21 @@
             }
         },
         methods: {
-            renderFromUrl: function (url) {
+            init: function () {
+                this.renderSummary()
+            },
+            renderSummary: function () {
+                this.renderFromUrl("./SUMMARY.md", "#summary")
+            },
+            renderFromUrl: function (url, node) {
                 $.get(url, function (response, status, xhr) {
                     console.log("===>", response)
-                    $("#content").html(marked(response));
+                    $(node).html(marked(response));
                 });
             }
         },
         mounted: async function () {
-            this.renderFromUrl("./SUMMARY.md")
-            console.log("mounted")
+            this.init()
         }
     });
 </script>
