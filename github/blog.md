@@ -48,7 +48,6 @@ renderer.link = (href, title, text) => {
 ```
 * 文件加载后初始化`sdk`,且调用`initSdk()`方法
 ```
-// new GithubBlogSdk(blogOptions,markedOptions)
 let sdk = new GithubBlogSdk({
     renderContent: (url, html, title) => {
         document.getElementById("content").innerHTML=html
@@ -115,14 +114,13 @@ window.renderGithubBlogContent = (url, title) => {
 
 let renderer = new marked.Renderer()
 renderer.link = (href, title, text) => {
-    //此处将项目内的<a>标签重新渲染了，改为锚点和触发renderGithubBlogContent方法
-    //
     if (href.startsWith("http")) {
         return `<a href="${href}" target="_blank">${text}</a>`
     } else {
         return `<a href="#${href}" onclick="renderGithubBlogContent('${href}','${text}')">${text}</a>`
     }
 }
+
 markedOptions = {
     renderer: renderer,
     gfm: true,
