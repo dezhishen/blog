@@ -30,6 +30,7 @@ renderer.link = (href, title, text) => {
 ## 使用说明
 * 创建index.html
 > 需要自己布局好目录位置和内容主体
+
 ```
     <el-container>
         <el-aside>
@@ -46,8 +47,11 @@ renderer.link = (href, title, text) => {
 ```
 <script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.js"></script>
 ```
+
 * 文件加载后初始化`sdk`,且调用`initSdk()`方法
+
 ```
+// new GithubBlogSdk(blogOptions,markedOptions)
 let sdk = new GithubBlogSdk({
     renderContent: (url, html, title) => {
         document.getElementById("content").innerHTML=html
@@ -59,17 +63,24 @@ let sdk = new GithubBlogSdk({
 },{})
 sdk.initSdk()
 ```
+
 * ps 可以结合vue等框架和组件构建你的主页,注意回调传入的直接是**html**
+
 ## options说明
+
 ### blogOptions
+
 * index
 
-首页路径,默认`./README.md`
+> 首页路径,默认`./README.md`
+
 * summary
 
-目录路径,默认值`./SUMMARY.md`
+> 目录路径,默认值`./SUMMARY.md`
+
 * renderContent
 > 渲染内容页的回调方法,回调参数 (url, html),`url`:地址,`html`:渲染的网页内容
+
 ```
 const markdown2html = function (url, options) {
     if (url) {
@@ -78,9 +89,6 @@ const markdown2html = function (url, options) {
         })
     }
 }
-...
-
-// 
 // 回调入口
 renderContent = (url) => {
     return this.loadConntent(url).then(
@@ -91,7 +99,9 @@ renderContent = (url) => {
 ```
 
 * renderSummary
+
 > 渲染目录的回调方法,回调参数 (url, html),`url`:地址,`html`:渲染的网页内容
+
 ```
 renderSummary = (url = this.blogOptions.summary) => {
     return this.loadSummary(url, this.markedOptions).then(text => {
@@ -103,6 +113,7 @@ renderSummary = (url = this.blogOptions.summary) => {
 ### markedOptions
 
 使用[marked](https://github.com/markedjs/marked)
+
 ```
 window.renderGithubBlogContent = (url, title) => {
     markdown2html(url, this.markedOptions).then(
@@ -114,13 +125,14 @@ window.renderGithubBlogContent = (url, title) => {
 
 let renderer = new marked.Renderer()
 renderer.link = (href, title, text) => {
+    //此处将项目内的<a>标签重新渲染了，改为锚点和触发renderGithubBlogContent方法
+    //
     if (href.startsWith("http")) {
         return `<a href="${href}" target="_blank">${text}</a>`
     } else {
         return `<a href="#${href}" onclick="renderGithubBlogContent('${href}','${text}')">${text}</a>`
     }
 }
-
 markedOptions = {
     renderer: renderer,
     gfm: true,
