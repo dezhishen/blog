@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8">
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.css"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <title>博客</title>
 </head>
@@ -19,7 +18,7 @@
                 <div style="text-align: center;">
                     <img style="border-radius: 30px;width: 60px;height: 60px;"
                         src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
-                    <a href="https://github.com/dezhiShen">github.com</a>
+                    <a href="https://github.com/dezhiShen">github.com/dezhiShen</a>
                 </div>
                 <div ref="summary"></div>
             </el-aside>
@@ -38,68 +37,30 @@
         computed: {},
         data() {
             return {
-                tagMappingUrl: {},
-                renderer: null,
             }
         },
         methods: {
-            init: async function () {
-                await this.initRender()
+            renderSummary: function (url, html) {
+                this.$refs.summary.innerHTML = html
             },
-            initRender: function () {
-                this.renderer = new marked.Renderer();
-                this.renderer.link = (href, title, text) => {
-                    if (href.startsWith("http")) {
-                        return `<a href="${href}" target="_blank">${text}</a>`
-                    } else {
-                        this.tagMappingUrl[text] = href
-                        return `<a href="#${text}" onclick="renderContent('${href}')">${text}</a>`
-                    }
-                }
-            },
-            renderSummary: async function () {
-                await this.renderFromUrl("./SUMMARY.md").then(
-                    data => {
-                        this.$refs.summary.innerHTML = data
-                    }
-                )
-            },
-            renderContent: async function (url) {
-                await this.renderFromUrl(url).then(data => {
-                    this.$refs.content.innerHTML = data
-                })
-            },
-            renderFromUrl: function (url, node) {
-                let instance = axios.create()
-                return instance.get(url).then(res => {
-                    return marked(res.data, {
-                        renderer: this.renderer,
-                        gfm: true,
-                        tables: true,
-                        breaks: false,
-                        pedantic: false,
-                        sanitize: false,
-                        smartLists: true,
-                        smartypants: false,
-                        highlight: this.highlight
-                    })
-                })
+            renderContent: function (url, html) {
+                this.$refs.content.innerHTML = html
             }
+
         },
+        mounted: function () {
+            let sdk = new GithubBlogSdk({
+                renderContent: (url, html, title) => {
+                    this.renderContent(url, html, title)
+                },
+                renderSummary: (url, html) => {
+                    this.renderSummary(url, html)
+                }
 
-        mounted: async function () {
-            window.renderContent = this.renderContent;
-            await this.init()
-            await this.renderSummary()
-            let url = window.location.href
-            if (url.split("#")[1]) {
-                this.renderContent(this.tagMappingUrl[decodeURI(url.split("#")[1])])
-            } else {
-                this.renderContent("./README.md")
-            }
-
+            })
+            sdk.initSdk()
         }
-    });
+    })
 </script>
 
 </html>
