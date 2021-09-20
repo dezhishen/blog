@@ -51,7 +51,7 @@ renderer.link = (href, title, text) => {
 * 文件加载后初始化`sdk`,且调用`initSdk()`方法
 
 ```
-// new GithubBlogSdk(blogOptions,markedOptions)
+
 let sdk = new GithubBlogSdk({
     renderContent: (url, html, title) => {
         document.getElementById("content").innerHTML=html
@@ -61,7 +61,9 @@ let sdk = new GithubBlogSdk({
     }
 
 },{})
+
 sdk.initSdk()
+
 ```
 
 * ps 可以结合vue等框架和组件构建你的主页,注意回调传入的直接是**html**
