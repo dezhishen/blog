@@ -111,7 +111,7 @@ renderSummary = (url = this.blogOptions.summary) => {
 ```
 ### markedOptions
 
-使用[marked]
+使用[marked](https://github.com/markedjs/marked)
 ```
 window.renderGithubBlogContent = (url, title) => {
     markdown2html(url, this.markedOptions).then(
