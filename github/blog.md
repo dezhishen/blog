@@ -41,15 +41,7 @@ renderer.link = (href, title, text) => {
     </el-container>
 ```
 * 创建SUMMARY.md
-> 目录,使用markdown
-```
-## [简介](README.md)
-### 目录1
-#### 目录2
-* [子标题1](./...)
-#### 目录3
-* [子标题2](./...)
-```
+> 目录,使用markdown中`[]()`
 * 引入js
 ```
 <script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.js"></script>
