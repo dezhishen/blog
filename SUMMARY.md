@@ -1,5 +1,7 @@
 ## [简介](README.md)
-### [家用服务器]
+### github
+* [使用github快速搭建博客](./github/blog.md)
+### 家用服务器
 #### 存储
 * [webdav](./home-server/storage/webdav.md)
 #### 音乐
