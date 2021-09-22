@@ -1,41 +1,124 @@
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@master/dist/index.js"></script>
-    <link rel="stylesheet" href="./index.css">
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <title>博客</title>
-</head>
-
-<body>
-    <div id="app">
-        <el-container>
-            <el-aside>
-                <div style="text-align: center;">
-                    <img style="border-radius: 30px;width: 60px;height: 60px;"
-                        src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
-                    <a href="https://github.com/dezhiShen">github.com/dezhiShen</a>
-                </div>
-                <div ref="summary"></div>
-            </el-aside>
-            <el-main>
-                <div ref="content"></div>
-            </el-main>
-        </el-container>
+    <head>
+        <meta charset="utf-8">
+        <title>未命名网页</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div>
+                <t-layer-box  class="" style="">
+                <t-form-box label-width="80px" v-model="changeableAttrs[&quot;F985078C-9184-48B1-BAA9-31A7B5286C85&quot;][&quot;v-model&quot;]" label-position="left" :state="changeableAttrs[&quot;F985078C-9184-48B1-BAA9-31A7B5286C85&quot;][&quot;state&quot;]" :visibility="changeableAttrs[&quot;F985078C-9184-48B1-BAA9-31A7B5286C85&quot;][&quot;visibility&quot;]" :form-rules="formRules" class="" style="">
+                <el-row :state="changeableAttrs[&quot;8042C391-E1D1-4ED5-B866-18BEB94EAD02&quot;][&quot;state&quot;]" :visibility="changeableAttrs[&quot;8042C391-E1D1-4ED5-B866-18BEB94EAD02&quot;][&quot;visibility&quot;]" gutter="0" class="" style="">
+                <el-col :state="changeableAttrs[&quot;942E07B3-22D7-4252-BEE3-DCD60613251D&quot;][&quot;state&quot;]" :visibility="changeableAttrs[&quot;942E07B3-22D7-4252-BEE3-DCD60613251D&quot;][&quot;visibility&quot;]" span="4" offset="0" class="" style="">
+                    <div ref="summary"></div>
+                </el-col> 
+                <el-col :state="changeableAttrs[&quot;AD5FAEEF-9DF5-4189-B689-575E4AD5A840&quot;][&quot;state&quot;]" :visibility="changeableAttrs[&quot;AD5FAEEF-9DF5-4189-B689-575E4AD5A840&quot;][&quot;visibility&quot;]" span="20" offset="0" class="" style="">
+                <el-card  class="" style="">
+                    <div ref="content"></div>
+                </el-card> 
+                </el-col> 
+                </el-row> 
+                </t-form-box> 
+                </t-layer-box> 
+            </div>
+        </div>
+    </body>
+    <script type="module">
+    </script>
+    <script type="module">
+    </script>
+    <script>
+    Vue.component("t-layer-box", {
+      name:"t-layer-box",
+      template: `<div><div><slot></slot></div></div>`,
+      props: {
+      },
+      data() {
+        return {
+        }
+      },
+      methods: {
+      },
+      watch:{
+      },
+      mounted:function(){
+      }
+    })
+    Vue.component("t-form-box", {
+      name:"t-form-box",
+      model:{
+        prop:"formData",
+        event:"change"
+    }
+      ,template: `<div>
+      <el-form :label-position="labelPosition" ref="form" :model="formData" :label-width="labelWidth" :rules="formRules">
+        <slot></slot>
+      </el-form>
     </div>
-</body>
-<script>
+    `,
+      props: {
+        formData:{
+            type:Object,
+            default:function(){return {}}, 
+        },
+        formRules:{
+            type:Object,
+            default:function(){return {}}, 
+        },
+        labelPosition:{
+            type:String,
+            default:"", 
+        },
+        labelWidth:{
+            type:String,
+            default:"100px", 
+        }
+      },
+      data() {
+        return {
+        }
+      },
+      methods: {
+      },
+      watch:{
+      },
+      mounted:function(){
+      }
+    });
+    </script>
+    <script>
+
     var vm = new Vue({
         el: "#app",
-        name: "app",
+        name: "",
         props: {},
         computed: {},
         data() {
             return {
+                changeableAttrs:{
+                	"F985078C-9184-48B1-BAA9-31A7B5286C85":{
+                		"v-model":"",
+                		"state":"normal",
+                		"visibility":false,
+                	},
+                	"8042C391-E1D1-4ED5-B866-18BEB94EAD02":{
+                		"state":"normal",
+                		"visibility":false,
+                	},
+                	"942E07B3-22D7-4252-BEE3-DCD60613251D":{
+                		"state":"normal",
+                		"visibility":false,
+                	},
+                	"AD5FAEEF-9DF5-4189-B689-575E4AD5A840":{
+                		"state":"normal",
+                		"visibility":false,
+                	},
+                },
+                formRules:{}
             }
         },
         methods: {
@@ -59,7 +142,6 @@
             })
             sdk.initSdk()
         }
-    })
-</script>
-
+    });
+    </script>
 </html>
