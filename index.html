@@ -14,22 +14,22 @@
 <body>
     <div id="app">
         <el-container>
-            <el-aside>
-                <div style="text-align: center;">
-                    <img style="border-radius: 30px;width: 60px;height: 60px;"
-                        src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
-                    <a href="https://github.com/dezhiShen">github.com/dezhiShen</a>
-                </div>
-                <div ref="summary"></div>
-            </el-aside>
             <el-container>
+                <el-aside>
+                    <div style="text-align: center;">
+                        <img style="border-radius: 30px;width: 60px;height: 60px;"
+                            src="https://avatars.githubusercontent.com/u/26274059?v=4"><br>
+                        <a href="https://github.com/dezhiShen">github.com/dezhiShen</a>
+                    </div>
+                    <div ref="summary"></div>
+                </el-aside>
                 <el-main>
                     <div ref="content"></div>
                 </el-main>
-                <el-footer>
-                    <div ref="comment"></div>
-                </el-footer>
             </el-container>
+            <el-footer>
+                <div ref="comment"></div>
+            </el-footer>
         </el-container>
     </div>
 </body>
