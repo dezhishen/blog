@@ -39,6 +39,14 @@ It's based on software we use for our public AdGuard DNS servers
         -o parent=eth0 macnet
     ```
 
+- 注意事项
+
+    ```
+    --subnet 所在网段跟你的局域网网段保持一致
+    --gateway 是你局域网的网关，一般为网段中的.1 如 192.168.31.1
+    --o parent 是指定你的物理网卡，使用ifconfig查询
+    ```
+
 - 参数说明
  
     ```
