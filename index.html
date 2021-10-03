@@ -44,8 +44,19 @@
             },
             renderContent: function (url, html) {
                 this.$refs.content.innerHTML = html
+                this.loadComment(url)
+            },
+            loadComment: function (url) {
+                var utterances = document.createElement('script');
+                utterances.type = 'text/javascript';
+                utterances.async = true;
+                utterances.setAttribute('issue-term', url)
+                utterances.setAttribute('theme', 'github-light')
+                utterances.setAttribute('repo', 'dezhiShen/blog')
+                utterances.crossorigin = 'anonymous';
+                utterances.src = 'https://utteranc.es/client.js';
+                this.$refs.content.appendChild(utterances)
             }
-
         },
         mounted: function () {
             let sdk = new GithubBlogSdk({
@@ -61,8 +72,5 @@
         }
     })
 </script>
-<script src="https://utteranc.es/client.js" repo="dezhiShen/blog" issue-term="pathname" theme="github-light"
-    crossorigin="anonymous" async>
-    </script>
 
 </html>
