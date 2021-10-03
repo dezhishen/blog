@@ -58,7 +58,7 @@
                 utterances.setAttribute('issue-term', url)
                 utterances.setAttribute('theme', 'github-light')
                 utterances.setAttribute('repo', 'dezhiShen/blog')
-                utterances.crossorigin = 'anonymous';
+                utterances.setAttribute('crossorigin', 'anonymous')
                 utterances.src = 'https://utteranc.es/client.js';
                 this.$refs.comment.innerHTML = ""
                 this.$refs.comment.appendChild(utterances)
