@@ -24,6 +24,7 @@
             </el-aside>
             <el-main>
                 <div ref="content"></div>
+                <div ref="comment"></div>
             </el-main>
         </el-container>
     </div>
@@ -43,8 +44,8 @@
                 this.$refs.summary.innerHTML = html
             },
             renderContent: function (url, html) {
-                this.$refs.content.innerHTML = html
                 this.loadComment(url)
+                this.$refs.content.innerHTML = html
             },
             loadComment: function (url) {
                 var utterances = document.createElement('script');
@@ -55,7 +56,8 @@
                 utterances.setAttribute('repo', 'dezhiShen/blog')
                 utterances.crossorigin = 'anonymous';
                 utterances.src = 'https://utteranc.es/client.js';
-                this.$refs.content.appendChild(utterances)
+                this.$refs.comment.innerHTML = ""
+                this.$refs.comment.appendChild(utterances)
             }
         },
         mounted: function () {
