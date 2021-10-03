@@ -7,11 +7,18 @@
 ## 简介
 
 ```
-  AdGuard Home is a network-wide software for blocking ads & tracking. After you set it up, it'll cover ALL your home devices, and you don't need any client-side software for that.
+  AdGuard Home is a network-wide software for blocking ads & tracking.
+After you set it up, it'll cover ALL your home devices,
+and you don't need any client-side software for that.
+  It operates as a DNS server that re-routes tracking domains to a "black hole", 
+thus preventing your devices from connecting to those servers.
+It's based on software we use for our public AdGuard DNS servers
+-- both share a lot of common code.
 
-  It operates as a DNS server that re-routes tracking domains to a "black hole", thus preventing your devices from connecting to those servers. It's based on software we use for our public AdGuard DNS servers -- both share a lot of common code.
-
-  AdGuard Home 是一款全网络软件，用于阻止广告和跟踪。设置后，它将涵盖您所有的家庭设备，您不需要任何客户端软件。 它作为 DNS 服务器运行，将跟踪域重新路由到“黑洞”，从而防止您的设备连接到这些服务器。它基于我们用于公共 AdGuard DNS 服务器的软件——两者共享许多通用代码。
+  AdGuard Home 是一款全网络软件，用于阻止广告和跟踪
+设置后，它将涵盖您所有的家庭设备，您不需要任何客户端软件。
+  它作为 DNS 服务器运行，将跟踪域重新路由到“黑洞”，从而防止您的设备连接到这些服务器
+它基于我们用于公共 AdGuard DNS 服务器的软件——两者共享许多通用代码。
 ```
 
 ## 安装
@@ -26,9 +33,10 @@
 - 命令行
 
     ```
-    docker network create -d macvlan \ --subnet=192.168.31.0/24 \
-    --gateway=192.168.31.1 \
-    -o parent=eth0 macnet
+    docker network create -d macvlan \
+        --subnet=192.168.31.0/24 \
+        --gateway=192.168.31.1 \
+        -o parent=eth0 macnet
     ```
 
 - 参数说明
