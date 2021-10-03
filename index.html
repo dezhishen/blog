@@ -28,7 +28,11 @@
                 </el-main>
             </el-container>
             <el-footer>
-                <div ref="comment"></div>
+                <div ref="comment">
+                    <script src="https://utteranc.es/client.js" repo="dezhiShen/blog" issue-term="url"
+                        theme="github-light" crossorigin="anonymous" async>
+                        </script>
+                </div>
             </el-footer>
         </el-container>
     </div>
@@ -48,7 +52,7 @@
                 this.$refs.summary.innerHTML = html
             },
             renderContent: function (url, html) {
-                this.loadComment(url)
+                // this.loadComment(url)
                 this.$refs.content.innerHTML = html
             },
             loadComment: function (url) {
