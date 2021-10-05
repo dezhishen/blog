@@ -8,14 +8,13 @@
     <script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@1.0/dist/index.js"></script>
     <link rel="stylesheet" href="./index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script src="https://unpkg.com/vue-utterances@0.1.2/dist/vue-utterances.min.js"></script>
     <title>博客</title>
 </head>
 
 <body>
-    <el-container>
-        <div id="app">
+    <div id="app">
+        <el-container>
             <el-container>
                 <el-aside>
                     <div style="text-align: center;">
@@ -29,15 +28,13 @@
                     <div ref="content"></div>
                 </el-main>
             </el-container>
-        </div>
-        <el-footer>
-            <div ref="comment">
-                <script src="https://utteranc.es/client.js" repo="dezhiShen/blog" issue-term="title"
-                    theme="github-light" crossorigin="anonymous" async>
-                    </script>
-            </div>
-        </el-footer>
-    </el-container>
+            <el-footer>
+                <div ref="comment">
+                    <vue-utterances repo="dezhiShen/blog" :issue-term="url" />
+                </div>
+            </el-footer>
+        </el-container>
+    </div>
 </body>
 <script>
     var vm = new Vue({
@@ -45,8 +42,12 @@
         name: "app",
         props: {},
         computed: {},
+        components: {
+            VueUtterances
+        },
         data() {
             return {
+                url: "./README.md"
             }
         },
         methods: {
@@ -55,6 +56,7 @@
             },
             renderContent: function (url, html, title) {
                 // this.loadComment(url)
+                this.url = url
                 this.$refs.content.innerHTML = html
                 if (title) {
                     window.document.title = title
