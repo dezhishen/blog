@@ -14,8 +14,8 @@
 </head>
 
 <body>
-    <div id="app">
-        <el-container>
+    <el-container>
+        <div id="app">
             <el-container>
                 <el-aside>
                     <div style="text-align: center;">
@@ -29,15 +29,15 @@
                     <div ref="content"></div>
                 </el-main>
             </el-container>
-            <el-footer>
-                <div ref="comment">
-                    <script src="https://utteranc.es/client.js" repo="dezhiShen/blog" issue-term="title"
-                        theme="github-light" crossorigin="anonymous" async>
-                        </script>
-                </div>
-            </el-footer>
-        </el-container>
-    </div>
+        </div>
+        <el-footer>
+            <div ref="comment">
+                <script src="https://utteranc.es/client.js" repo="dezhiShen/blog" issue-term="title"
+                    theme="github-light" crossorigin="anonymous" async>
+                    </script>
+            </div>
+        </el-footer>
+    </el-container>
 </body>
 <script>
     var vm = new Vue({
