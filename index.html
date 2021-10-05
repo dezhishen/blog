@@ -4,17 +4,16 @@
     <meta charset="utf-8">
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://cdn.jsdelivr.net/gh/dezhiShen/github-blog-sdk@1.0/dist/index.js"></script>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="https://unpkg.com/vue-utterances@0.1.2/dist/vue-utterances.min.js"></script>
     <title>博客</title>
 </head>
 
 <body>
-    <div id="app">
-        <el-container>
+    <el-container>
+        <div id="app">
             <el-container>
                 <el-aside>
                     <div style="text-align: center;">
@@ -28,27 +27,23 @@
                     <div ref="content"></div>
                 </el-main>
             </el-container>
-            <el-footer>
-                <div ref="comment">
-                    <vue-utterances repo="dezhiShen/blog" :issue-term="url" />
-                </div>
-            </el-footer>
-        </el-container>
-    </div>
+        </div>
+        <el-footer>
+            <div ref="comment">
+            </div>
+        </el-footer>
+    </el-container>
 </body>
 <script>
-    import VueUtterances from 'vue-utterances'
     var vm = new Vue({
         el: "#app",
         name: "app",
         props: {},
         computed: {},
         components: {
-            VueUtterances
         },
         data() {
             return {
-                url: "./README.md"
             }
         },
         methods: {
@@ -56,14 +51,23 @@
                 this.$refs.summary.innerHTML = html
             },
             renderContent: function (url, html, title) {
-                // this.loadComment(url)
-                this.url = url
+                this.loadComment(url)
                 this.$refs.content.innerHTML = html
                 if (title) {
                     window.document.title = title
                 }
             },
             loadComment: function (url) {
+                var utterances = document.createElement('script');
+                utterances.type = 'text/javascript';
+                utterances.async = true;
+                utterances.setAttribute('issue-term', url)
+                utterances.setAttribute('theme', 'github-light')
+                utterances.setAttribute('repo', 'dezhiShen/blog')
+                utterances.setAttribute('crossorigin', 'anonymous')
+                utterances.src = 'https://utteranc.es/client.js';
+                this.$refs.comment.innerHTML = ""
+                this.$refs.comment.appendChild(utterances)
 
             }
         },
